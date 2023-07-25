@@ -1,0 +1,25 @@
+
+<div class="container">
+    <div mat-dialog-title>
+        <h1>User Role Form</h1>
+    </div>
+    <form [formGroup]="userRoleForm" (ngSubmit)="onFormSubmit()">
+        <div mat-dialog-content class="content">
+            <div class="d-flex flex-column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Role name </mat-label>
+                    <input matInput type="text" title="RoleName" formControlName="roleName">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput title="Comments" formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <div mat-dialog-actions class="action">
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+            <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+        </div>
+    </form>
+</div>
