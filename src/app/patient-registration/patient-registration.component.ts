@@ -75,7 +75,7 @@ export class PatientRegistrationComponent {
   openEditForm(data: any) {
     const dialogRef = this._dialog.open(PatientRegistrationAddEditComponent, {
       data,
-      
+      disableClose: true
     });
     console.log(data);
     dialogRef.afterClosed().subscribe({

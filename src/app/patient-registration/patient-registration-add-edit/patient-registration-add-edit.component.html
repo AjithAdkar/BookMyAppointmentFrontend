@@ -1,8 +1,12 @@
+
 <mat-card>
+  <div class="modal-header" style="padding: 20px;">
+    <div class="w-100 text-center">
+        <h2 class="modal-title" style="margin: 0px;" >Patient Registration Form</h2>
+    </div>
+    <button type="button" class="btn-close " aria-label="Close" (click)="_dialogRef.close()"></button>
+  </div>
     <div style="text-align: center; padding: 50px">
-      <div style="padding: 20px">
-        <h1>Patient Registration Form</h1>
-      </div>
       <form [formGroup]="patientRegistrationForm" (ngSubmit)="onFormSubmit()">
         <mat-form-field appearance="outline" style="width: 400px">
           <mat-label>Name</mat-label>

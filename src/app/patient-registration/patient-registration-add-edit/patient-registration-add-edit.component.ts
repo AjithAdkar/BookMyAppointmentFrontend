@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CoreService } from 'src/app/core/core.service';
 import { PatientRegistrationService } from '../service/patient-registration.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-patient-registration-add-edit',
@@ -16,6 +17,7 @@ export class PatientRegistrationAddEditComponent implements OnInit{
                 private _fb: FormBuilder,
                 private patientService:PatientRegistrationService,
                 private _coreService:CoreService,
+                public _dialogRef:DialogRef,
                 @Inject(MAT_DIALOG_DATA) public data: any,
               ) {
     this.patientRegistrationForm = this._fb.group({
