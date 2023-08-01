@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PatientRegistrationModule } from './patient-registration/patient-registration.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatListModule,
     MatExpansionModule,
     MatTooltipModule,
-    UserRolesModule
+    UserRolesModule,
+    // PatientRegistrationModule
   ],
   providers: [],
   bootstrap: [AppComponent],
