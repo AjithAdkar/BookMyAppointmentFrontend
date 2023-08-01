@@ -1,0 +1,112 @@
+<div class="container cord" style="text-align: center;padding:30px;background-color:white;">
+  <div mat-dialog-title style="padding: 15px;">
+    <h1 class="text-center">Slot Configuration</h1>
+  </div>
+
+  <form [formGroup]="slotConfigurationForm" (ngSubmit)="onFormSubmit()">
+    <div style="text-align: left;margin-left: 40px;">
+
+      <!--Error message -->
+      <mat-error
+        *ngIf="slotConfigurationForm.get('endTime')?.hasError('startTimeandendTimeError')&&slotConfigurationForm.get('startTime')?.hasError('startTimeandendTimeError')">
+        End date must be greater than start date
+      </mat-error>
+      <mat-error
+        *ngIf="slotConfigurationForm.get('endTime')?.hasError('startTimeandendTimeEqualError')&&slotConfigurationForm.get('startTime')?.hasError('startTimeandendTimeEqualError')">
+        start time and end time not be equal
+      </mat-error>
+    </div>
+    <div mat-dialog-content class="d-flex flex-row">
+      <div class="column">
+
+        <!-- Doctor name -->
+        <mat-form-field appearance="outline" class="fixed-width">
+          <mat-label>Doctor Name</mat-label>
+          <mat-select formControlName="doctorName">
+            <mat-option value="Doctor A">Doctor A</mat-option>
+            <mat-option value="Doctor B">Doctor B</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Specialization -->
+        <mat-form-field appearance="outline" class="fixed-width">
+          <mat-label>Specialization</mat-label>
+          <mat-select formControlName="specialization">
+            <mat-option value="specialization A">Specialization A</mat-option>
+            <mat-option value="specialization B">Specialization B</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Date -->
+        <mat-form-field appearance="outline" class="fixed-width">
+          <mat-label>Select a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="registrationDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="column">
+        <!-- Start Time 24hr -->
+        <ng-container *ngIf="showDefaultTimeFormat; else otherContent1">
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label>Start Time</mat-label>
+            <input matInput type="time" formControlName="startTime">
+          </mat-form-field>
+        </ng-container>
+
+        <!-- End Time 24hr -->
+        <ng-container *ngIf="showDefaultTimeFormat; else otherContent2">
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label>End Time</mat-label>
+            <input matInput type="time" formControlName="endTime">
+          </mat-form-field>
+        </ng-container>
+
+        <!-- Start Time 12hr -->
+        <ng-template #otherContent1>
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label>Start Time</mat-label>
+            <input matInput type="text" [value]='"00:00 AM"' pattern="^(0?[1-9]|1[0-2]):[0-5][0-9] [APap][mM]$"
+              formControlName="startTime" maxlength="8" placeholder="hh:mm AM/PM">
+          </mat-form-field>
+        </ng-template>
+
+        <!-- End Time 12hr -->
+        <ng-template #otherContent2>
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label>End Time</mat-label>
+            <input matInput type="text" [value]='"00:00 AM"' pattern="^(0?[1-9]|1[0-2]):[0-5][0-9] [APap][mM]$"
+              formControlName="endTime" placeholder="hh:mm AM/PM">
+          </mat-form-field>
+        </ng-template>
+
+        <!-- Duration -->
+        <mat-form-field appearance="outline" class="fixed-width">
+          <mat-label>Duration</mat-label>
+          <!-- validation range 0-4hrs , 0-60min -->
+          <input matInput type="text" formControlName="duration" placeholder="e.g., 2hrs/30min/3hrs45min">
+          <mat-error *ngIf="slotConfigurationForm.get('duration')?.hasError('durationError')">
+            Enter valid Duration:"3hrs", "20min", "2hrs30min"
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <!-- Remarks -->
+    <div>
+      <mat-form-field appearance="outline" class="remarks">
+        <mat-label>Remarks</mat-label>
+        <textarea matInput formControlName="remarks"></textarea>
+      </mat-form-field>
+    </div>
+
+     <!-- Save_Reset -->
+    <div class="text-center mb-3">
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="slotConfigurationForm.invalid">Save</button>&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button type="reset" color="warn">Reset</button>
+    </div>
+  </form>
+</div>
