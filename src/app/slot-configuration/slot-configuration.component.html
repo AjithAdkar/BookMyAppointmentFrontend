@@ -87,7 +87,7 @@
           <!-- validation range 0-4hrs , 0-60min -->
           <input matInput type="text" formControlName="duration" placeholder="e.g., 2hrs/30min/3hrs45min">
           <mat-error *ngIf="slotConfigurationForm.get('duration')?.hasError('durationError')">
-            Enter valid Duration:"3hrs", "20min", "2hrs30min"
+          Invalid Duration or range:"0-4hrs","0-60min","2hrs30min"
           </mat-error>
         </mat-form-field>
       </div>

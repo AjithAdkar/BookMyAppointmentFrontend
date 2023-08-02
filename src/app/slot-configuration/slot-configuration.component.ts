@@ -63,6 +63,20 @@ export class SlotConfigurationComponent {
       const startTime24 = this.convertTimeTo24Hours(startTimeValue);
       const endTime24 = this.convertTimeTo24Hours(endDTimeValue);
 
+      if (startTime24 == endTime24 && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+        return;
+      }
+
+      if (startTime24 > endTime24 && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
+        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
+        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+        return;
+      } // Stop form submission
+
       if (startTime24 > endTime24) {
         this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
         this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
@@ -108,6 +122,21 @@ export class SlotConfigurationComponent {
       const startTimeValue = this.slotConfigurationForm.get('startTime')?.value;
       const endDTimeValue = this.slotConfigurationForm.get('endTime')?.value;
 
+
+      if (startTimeValue > endDTimeValue && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
+        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
+        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+
+        return;
+      } // Stop form submission
+
+      if (startTimeValue == endDTimeValue && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+        return;
+      }
 
       if (startTimeValue > endDTimeValue) {
         this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
