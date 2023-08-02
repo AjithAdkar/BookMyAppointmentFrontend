@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  Validators, FormControl, FormBuilder } from '@angular/forms';
 import { DoctorReistrationService } from './services/doctor-registration.service';
-import doctorregistration from '../assets/doctorregistration.json';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CoreService } from '../core/core.service';
 
 
-// console.log("ABC");
-console.log("doctorregistrationData",doctorregistration.doctordetails);
 @Component({
   selector: 'app-doctor-registration',
   templateUrl: './doctor-registration.component.html',

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DoctorRegistration } from 'src/app/models/doctorregistration';
-import doctorregistration from '../assets/doctorregistration.json';
 
 import { environment } from 'src/environments/environment';
 @Injectable({
