@@ -49,7 +49,7 @@ export class PatientRegistrationComponent {
       }
     });
   }
-  
+        //  this method is use to register new patient, in this component 
   // openAddEditPatientForm(){
   //   const dialogRef = this._dialog.open(PatientRegistrationAddEditComponent);
   //   dialogRef.afterClosed().subscribe({
@@ -77,7 +77,6 @@ export class PatientRegistrationComponent {
       data,
       disableClose: true
     });
-    console.log(data);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {

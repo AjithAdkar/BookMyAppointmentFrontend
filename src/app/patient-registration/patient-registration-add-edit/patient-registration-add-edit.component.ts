@@ -1,9 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoreService } from 'src/app/core/core.service';
 import { PatientRegistrationService } from '../service/patient-registration.service';
-import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-patient-registration-add-edit',
@@ -11,13 +10,13 @@ import { DialogRef } from '@angular/cdk/dialog';
   styleUrls: ['./patient-registration-add-edit.component.scss']
 })
 export class PatientRegistrationAddEditComponent implements OnInit{
-
   patientRegistrationForm: FormGroup;
+
   constructor(
                 private _fb: FormBuilder,
                 private patientService:PatientRegistrationService,
                 private _coreService:CoreService,
-                public _dialogRef:DialogRef,
+                public _dialogRef:MatDialogRef<PatientRegistrationAddEditComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any,
               ) {
     this.patientRegistrationForm = this._fb.group({
@@ -40,7 +39,8 @@ export class PatientRegistrationAddEditComponent implements OnInit{
           this.patientService.updatePatient(this.data.id,this.patientRegistrationForm.value).subscribe({
             next:(val:any)=>{
               this._coreService.openSnackBar("Patient Details Updated Successfully", "Close");
-            this.patientRegistrationForm.reset();
+              this._dialogRef.close(true);
+              this.patientRegistrationForm.reset();
             Object.keys(this.patientRegistrationForm.controls).forEach((key) => {
               this.patientRegistrationForm.get(key)?.setErrors(null);
             });

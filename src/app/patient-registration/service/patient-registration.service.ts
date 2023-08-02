@@ -28,10 +28,8 @@ export class PatientRegistrationService {
   }
 
 
-  updatePatient(id: number, patient: PatientRegistration): Observable<PatientRegistration> {
-    const url = this.baseUrl+'updatepatient/'+id;
-    console.log("from update method in service : id---"+id);
-    
+  updatePatient(patientId: number, patient: PatientRegistration): Observable<PatientRegistration> {
+    const url = this.baseUrl+'updatepatient/'+patientId;
     return this.httpClient.put<PatientRegistration>(url, patient);
   }
 
