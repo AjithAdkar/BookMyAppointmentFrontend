@@ -1,0 +1,72 @@
+
+<div class="d-flex flex-column">
+  <h1 class="text-center me-auto mt-3">Registered Doctor Details</h1>
+  <mat-form-field>
+      <mat-label> <mat-icon>search</mat-icon> Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Type Here">
+  </mat-form-field>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="doctorName">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let row"> {{row.doctorName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doctorgender">
+      <th mat-header-cell *matHeaderCellDef> Gender</th>
+      <td mat-cell *matCellDef="let row"> {{row.doctorgender}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doctorEmail">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let row"> {{row.doctorEmail}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doctorSpecialization">
+      <th mat-header-cell *matHeaderCellDef> Specialization </th>
+      <td mat-cell *matCellDef="let row"> {{row.doctorSpecialization}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doctorExperience">
+      <th mat-header-cell *matHeaderCellDef> Experience </th>
+      <td mat-cell *matCellDef="let row"> {{row.doctorExperience}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="doctorQualification">
+      <th mat-header-cell *matHeaderCellDef> Qualification </th>
+      <td mat-cell *matCellDef="let row"> {{row.doctorQualification}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+      <td mat-cell *matCellDef="let row">
+          
+          <button mat-icon-button color="prmary" (click)="openEditForm(row.id)">
+              <mat-icon>edit</mat-icon>
+          </button>
+          
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+</table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" aria-label="Select page of users"></mat-paginator>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+  

@@ -1,0 +1,29 @@
+<div style="width: 400px; height: 400px;">
+    <div class="modal-header" style="padding: 20px;">
+        <div class="w-100 text-center">
+            <h2 class="modal-title" style="margin: 0px;" >Specialization Registration Form</h2>
+        </div>
+        <button type="button" class="btn-close " aria-label="Close" (click)="_dialogRef.close()"></button>
+      </div>
+    <div class="container">
+        <form [formGroup]="specializationRegistrationForm" (ngSubmit)="onFormSubmit()">
+            <div mat-dialog-content class="content">
+                <div class="d-flex flex-column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name </mat-label>
+                        <input matInput type="text" title="Name" formControlName="specializationName">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput title="Comments" formControlName="specializationDescription"></textarea>
+                    </mat-form-field>
+                </div>
+    
+            </div>
+            <div mat-dialog-actions class="action">
+                <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+                <button mat-raised-button color="primary" type="submit"[disabled]="specializationRegistrationForm.invalid">{{data ? 'Update': 'Save'}}</button>
+            </div>
+        </form>
+    </div>
+</div>
