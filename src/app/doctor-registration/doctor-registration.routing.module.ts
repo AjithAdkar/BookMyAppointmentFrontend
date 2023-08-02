@@ -8,13 +8,9 @@ import { ShowDoctorDetailsComponent } from './show-doctor-details/show-doctor-de
 const routes: Routes =[
   { path: '', component: DoctorRegistrationComponent },
   { path: 'show-doctor-details', component: ShowDoctorDetailsComponent },
-  
 ];
-
 @NgModule({
-
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
-  
 })
 export class DoctorRegistrationRoutingModule { }
