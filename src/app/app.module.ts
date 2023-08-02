@@ -3,24 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserRolesModule } from './user-roles/user-roles.module';
 import { AppDashboardModule } from './app-dashboard/app-dashboard.module';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { PatientRegistrationModule } from './patient-registration/patient-registration.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -29,7 +30,7 @@ import { PatientRegistrationModule } from './patient-registration/patient-regist
     FormsModule,
     BrowserAnimationsModule,
     AppDashboardModule,
-    
+    ReactiveFormsModule,
     MatButtonModule,
     MatSidenavModule,
     MatMenuModule,
@@ -39,7 +40,8 @@ import { PatientRegistrationModule } from './patient-registration/patient-regist
     MatExpansionModule,
     MatTooltipModule,
     UserRolesModule,
-    // PatientRegistrationModule
+    MatSnackBarModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
