@@ -34,7 +34,6 @@
     </mat-menu>
 </mat-toolbar>
 <!-- Tool Bar Ends --> 
-
 <!-- SideBar Starts -->
 <mat-sidenav-container class="app-container">
     <mat-sidenav #sidenav mode="over" [class.mat-elevation-z4]="true" class="app-sidenav" (click)="sidenav.toggle()">
@@ -48,6 +47,12 @@
             <mat-list-item routerLink="app-dashboard">
                 <mat-icon>person</mat-icon><span>Client Module </span>
             </mat-list-item>
+        <mat-list-item routerLink="doctor-registration">
+            <mat-icon>person</mat-icon><span>Doctor Registration</span>
+        </mat-list-item>
+        <mat-list-item routerLink="doctor-registration/show-doctor-details">
+            <mat-icon>person</mat-icon><span>Show Doctor Details</span>
+        </mat-list-item>
             <mat-list-item routerLink="patients">
                 <mat-icon>person</mat-icon><span>Patients</span>
             </mat-list-item>

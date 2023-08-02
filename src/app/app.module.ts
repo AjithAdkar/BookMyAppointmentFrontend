@@ -14,10 +14,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,20 +32,26 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     BrowserAnimationsModule,
     AppDashboardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatToolbarModule,
     MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
     MatListModule,
     MatExpansionModule,
     MatTooltipModule,
-    UserRolesModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatDialogModule,
     MatSnackBarModule,
     MatPaginatorModule,
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
