@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserRolesModule } from './user-roles/user-roles.module';
 import { AppDashboardModule } from './app-dashboard/app-dashboard.module';
@@ -16,7 +16,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent
@@ -28,18 +32,23 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FormsModule,
     BrowserAnimationsModule,
     AppDashboardModule,
-    
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatButtonModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatToolbarModule,
     MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
     MatListModule,
     MatExpansionModule,
     MatTooltipModule,
-    UserRolesModule
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
