@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
+import { SpecializationRegistrationService } from '../specialization-registration/services/specialization-registration.service';
+import { DoctorReistrationService } from '../doctor-registration/services/doctor-registration.service';
 
 @Component({
   selector: 'app-slot-configuration',
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./slot-configuration.component.scss']
 
 })
-export class SlotConfigurationComponent {
+export class SlotConfigurationComponent implements OnInit {
 
   slotConfigurationForm: FormGroup;
 
@@ -19,9 +19,20 @@ export class SlotConfigurationComponent {
 
   static readonly durationPattern = /^(?:[0-4]hrs)?(?:(?:[1-9]|[1-5][0-9])min)?$/;
 
+  specializationData: any[] =[];
+
+  doctorData: any[] =[];
+  
+  isFormSubmitted: boolean = false;
+
+
+
 
   constructor(
     private _fb: FormBuilder,
+    private specializationRegistrationService: SpecializationRegistrationService,
+    private doctorReistrationService: DoctorReistrationService,
+
   ) {
     this.slotConfigurationForm = this._fb.group({
       doctorName: ['', Validators.required],
@@ -33,6 +44,16 @@ export class SlotConfigurationComponent {
       specialization: ['', Validators.required],
     });
   }
+
+  ngOnInit(): void {
+    this.specializationRegistrationService.getAllSpecialization().subscribe(getallspecialization =>{
+      this.specializationData = getallspecialization;
+    });
+  this.doctorReistrationService.fetchAllDoctors().subscribe(getalldoctor =>{
+      this.doctorData=getalldoctor;
+  });
+  }
+
 
   convertTimeTo24Hours(timeStr: string): string {
     const [time, meridiem] = timeStr.split(' ');
