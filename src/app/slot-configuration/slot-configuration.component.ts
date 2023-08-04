@@ -17,7 +17,19 @@ export class SlotConfigurationComponent implements OnInit {
 
   static readonly timePatternFor24hr = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
-  static readonly durationPattern = /^(?:[0-4]hrs)?(?:(?:[1-9]|[1-5][0-9])min)?$/;
+  // static readonly durationPattern = /^(?:[0-4]hrs)?(?:(?:[1-9]|[1-5][0-9])min)?$/;
+
+  start24Time : string = '';
+  end24Time: string = '';
+
+  timeSlots: { start24Time: string, end24Time: string }[] = [];
+
+  lunchTimeStart : string = '13:00';
+  lunchTimeEnd : string = '14:00';
+
+  setSlotTime : number = 15;
+
+  showSlots : boolean = false;
 
   specializationData: any[] =[];
 
@@ -84,19 +96,19 @@ export class SlotConfigurationComponent implements OnInit {
       const startTime24 = this.convertTimeTo24Hours(startTimeValue);
       const endTime24 = this.convertTimeTo24Hours(endDTimeValue);
 
-      if (startTime24 == endTime24 && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
-        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
-        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
-        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
-        return;
-      }
+      // if (startTime24 == endTime24 && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+      //   this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+      //   this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+      //   // this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+      //   return;
+      // }
 
-      if (startTime24 > endTime24 && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
-        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
-        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
-        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
-        return;
-      } // Stop form submission
+      // if (startTime24 > endTime24 && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+      //   this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
+      //   this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
+      //   // this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+      //   return;
+      // } // Stop form submission
 
       if (startTime24 > endTime24) {
         this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
@@ -112,9 +124,9 @@ export class SlotConfigurationComponent implements OnInit {
 
       const durationValue = this.slotConfigurationForm.get('duration')?.value;
 
-      if (!SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
-        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
-      }
+      // if (!SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+      //   this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+      // }
 
     }
 
@@ -132,8 +144,20 @@ export class SlotConfigurationComponent implements OnInit {
       //   startTime: startTime24,
       //   endTime: endTime24
       // });
+
+      this.start24Time = startTime24;
+      this.end24Time = endTime24;
+
+      // this.slotConfigurationForm.patchValue({
+        startTime: startTime24;
+        endTime: endTime24;
+        
+      // });
       const slotConfiguration = this.slotConfigurationForm.value;
       console.log(slotConfiguration);
+      
+      console.log(startTime24);
+      console.log(endTime24);
       console.log(typeof (this.slotConfigurationForm.value.startTime))
     }
 
@@ -144,20 +168,20 @@ export class SlotConfigurationComponent implements OnInit {
       const endDTimeValue = this.slotConfigurationForm.get('endTime')?.value;
 
 
-      if (startTimeValue > endDTimeValue && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
-        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
-        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
-        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+      // if (startTimeValue > endDTimeValue && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+      //   this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
+      //   this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeError': true });
+      //   // this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
 
-        return;
-      } // Stop form submission
+      //   return;
+      // } // Stop form submission
 
-      if (startTimeValue == endDTimeValue && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
-        this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
-        this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
-        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
-        return;
-      }
+      // if (startTimeValue == endDTimeValue && !SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+      //   this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+      //   this.slotConfigurationForm.get('startTime')?.setErrors({ 'startTimeandendTimeEqualError': true });
+      //   // this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+      //   return;
+      // }
 
       if (startTimeValue > endDTimeValue) {
         this.slotConfigurationForm.get('endTime')?.setErrors({ 'startTimeandendTimeError': true });
@@ -173,16 +197,101 @@ export class SlotConfigurationComponent implements OnInit {
       }
       const durationValue = this.slotConfigurationForm.get('duration')?.value;
 
-      if (!SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
-        this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
-      }
+      // if (!SlotConfigurationComponent.durationPattern.test(this.slotConfigurationForm.value.duration)) {
+      //   this.slotConfigurationForm.get('duration')?.setErrors({ 'durationError': true });
+      // }
     }
 
 
       // For 24 hour format  
     if (this.slotConfigurationForm.valid && SlotConfigurationComponent.timePatternFor24hr.test(this.slotConfigurationForm.value.startTime)) {
       const slotConfiguration = this.slotConfigurationForm.value;
-      console.log(slotConfiguration);
+      // console.log(slotConfiguration);
     }
+  }
+
+  setTimer(){
+    const startTimeValue = this.slotConfigurationForm.get('startTime')?.value;
+      const endDTimeValue = this.slotConfigurationForm.get('endTime')?.value;
+
+    const startTime24 = this.convertTimeTo24Hours(startTimeValue);
+      const endTime24 = this.convertTimeTo24Hours(endDTimeValue);
+
+      
+      this.start24Time = startTime24;
+      this.end24Time = endTime24;
+  }
+  //generete Slots function
+  generateTimeSlots() {
+    this.showSlots = false;
+    this.showSlots = true;
+    this.timeSlots = [];
+    this.durationToMin();
+    this.setTimer();
+  
+    // Convert the start and end times to Date objects
+    const startDate = new Date(`2000-01-01 ${this.start24Time}`);
+    const endDate = new Date(`2000-01-01 ${this.end24Time}`);
+  
+    const lunchStart = new Date(`2000-01-01 ${this.lunchTimeStart}`);
+    const lunchEnd = new Date(`2000-01-01 ${this.lunchTimeStart}`);
+  
+    // Calculate the time difference in minutes between the start and end times
+    // const slotDurationInMinutes = 15;
+    const slotDurationInMinutes = this.slotConfigurationForm.get('duration')?.value;
+    for (let i = startDate.getTime(); i <= endDate.getTime(); i += slotDurationInMinutes * 60 * 1000) {
+      const slotStart = new Date(i);
+      const slotEnd = new Date(i + slotDurationInMinutes * 60 * 1000);
+  
+      //Testing
+      if(slotEnd > new Date(lunchStart.getTime()) && slotEnd < new Date(lunchEnd.getTime())){
+        i = lunchStart.getTime();
+        const slotStart = new Date(i);
+      const slotEnd = new Date(i + slotDurationInMinutes * 60 * 1000);
+      
+      const slotStartTime = slotStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const slotEndTime = slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
+      // Add the slot to the array
+      this.timeSlots.push({ start24Time: slotStartTime, end24Time: slotEndTime });
+        continue;
+      }
+  
+      if(slotEnd > endDate)
+      {
+        const slotEnd = endDate;
+        const slotStartTime = slotStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const slotEndTime = slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
+      if(slotEnd == endDate){
+        break;
+      }
+  
+      // Add the slot to the array
+      this.timeSlots.push({ start24Time: slotStartTime, end24Time: slotEndTime });
+        break;
+      }
+
+      // // Format the time in HH:mm format
+      const slotStartTime = slotStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const slotEndTime = slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      // console.log(slotStartTime);
+      // console.log(slotEndTime);
+      
+  
+      // Add the slot to the array
+      this.timeSlots.push({ start24Time: slotStartTime, end24Time: slotEndTime });
+    }
+  }
+
+  durationToMin(){
+   const durat = this.slotConfigurationForm.get('duration')?.value;
+   console.log(durat);
+   console.log(typeof(this.slotConfigurationForm.get('duration')?.value));
+   
+  }
+
+  resetSlots(){
+    this.showSlots = false;
   }
 }
