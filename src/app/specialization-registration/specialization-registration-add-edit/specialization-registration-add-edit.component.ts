@@ -32,8 +32,6 @@ export class SpecializationRegistrationAddEditComponent implements OnInit {
 
   onFormSubmit() {
     if (this.specializationRegistrationForm.valid) {
-      console.log(this.specializationRegistrationForm.value);
-
       if (this.data) {
         this.specializationRegistrationService
           .updateSpecializationById(this.data.id, this.specializationRegistrationForm.value)

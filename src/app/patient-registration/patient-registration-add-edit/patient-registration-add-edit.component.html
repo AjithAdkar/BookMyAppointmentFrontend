@@ -1,0 +1,50 @@
+
+<mat-card>
+  <div class="modal-header" style="padding: 20px;">
+    <div class="w-100 text-center">
+        <h2 class="modal-title" style="margin: 0px;" >Patient Registration Form</h2>
+    </div>
+    <button type="button" class="btn-close " aria-label="Close" (click)="_dialogRef.close()"></button>
+  </div>
+    <div style="text-align: center; padding: 50px">
+      <form [formGroup]="patientRegistrationForm" (ngSubmit)="onFormSubmit()">
+        <mat-form-field appearance="outline" style="width: 400px">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="patientName" />
+          <mat-error *ngIf="patientRegistrationForm.get('patientName')?.hasError('required')">
+            Name number is required.
+          </mat-error> 
+        </mat-form-field><br />
+        <mat-form-field appearance="outline" style="width: 400px">
+          <mat-label>Phone</mat-label>
+          <input matInput type="text" formControlName="patientPhone" />
+          <mat-error *ngIf="patientRegistrationForm.get('patientPhone')?.hasError('required')">
+            Phone number is required.
+          </mat-error>
+          <mat-error *ngIf="patientRegistrationForm.get('patientPhone')?.hasError('invalidPhoneNumber')">
+            Phone number must have exactly 10 digits and start from 6-9.
+          </mat-error>
+        </mat-form-field><br />
+        <mat-form-field appearance="outline" style="width: 400px">
+          <mat-label>Email</mat-label>
+          <input matInput type="text" formControlName="patientEmail" /> 
+        </mat-form-field><br />
+        <mat-form-field appearance="outline" style="width: 400px">
+          <mat-label>Occupation</mat-label>
+          <input matInput type="text" formControlName="patientOccupation" /> 
+        </mat-form-field><br />
+        <mat-form-field appearance="outline" style="width: 400px">
+          <mat-label>Comments</mat-label>
+          <textarea matInput type="text" formControlName="comments"></textarea>
+        </mat-form-field>
+  
+        <div style="padding: 25px">
+          <button mat-raised-button color="warn" type="reset">Clear</button>
+          &nbsp; &nbsp;
+          <button mat-raised-button color="primary" type="submit" [disabled]="patientRegistrationForm.invalid">
+            {{data ? 'Update': 'Save'}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
