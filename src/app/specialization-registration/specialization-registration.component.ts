@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator} from '@angular/material/paginator';
-import { MatSort} from '@angular/material/sort';
-import { MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CoreService } from '../core/core.service';
 import { SpecializationRegistration } from '../models/specialization-registration';
@@ -15,21 +15,21 @@ import { SpecializationRegistrationAddEditComponent } from './specialization-reg
 })
 export class SpecializationRegistrationComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'Name', 'description', "action"];
+  displayedColumns: string[] = ['Name', 'description', "action"];
   dataSource!: MatTableDataSource<SpecializationRegistration>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   specializationList: SpecializationRegistration[] = [];
-  singleName = {} ;
+  singleName = {};
 
-  constructor(private specializationRegistrationService: SpecializationRegistrationService, 
-              private _dialog: MatDialog,
-              private _coreService: CoreService){}
+  constructor(private specializationRegistrationService: SpecializationRegistrationService,
+    private _dialog: MatDialog,
+    private _coreService: CoreService) { }
 
   ngOnInit(): void {
-    this.getAllSpecialization();
+    this.fetchAllSpecialization();
   }
 
   applyFilter(event: Event) {
@@ -41,55 +41,53 @@ export class SpecializationRegistrationComponent implements OnInit {
   }
 
   openAddEditSpecializationRegistrationForm() {
-    const dialogRef = this._dialog.open(SpecializationRegistrationAddEditComponent,{disableClose:true});
+    const dialogRef = this._dialog.open(SpecializationRegistrationAddEditComponent, { disableClose: true });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.getAllSpecialization();
+          this.fetchAllSpecialization();
         }
       },
     });
   }
 
-  getAllSpecialization(){
-    
-  this.specializationRegistrationService.getAllSpecialization().subscribe({
-    next: data =>{
-      this.specializationList = data;
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    },
-    error: err=>{
-      console.log("unable to fetch the specialization."+ err);    
-    }
-  });
+  fetchAllSpecialization() {
+    this.specializationRegistrationService.fetchAllSpecialization().subscribe({
+      next: data => {
+        this.specializationList = data;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      error: err => {
+        console.log("unable to fetch the specialization." + err);
+      }
+    });
 
-}
-
-deleteDoctorSpecialization(id: number){
-      this.specializationRegistrationService.deleteDoctorSpecialization(id)
+  }
+  deleteSpecialization(id: number) {
+    this.specializationRegistrationService.deleteSpecialization(id)
       .subscribe({
-       next: (data:any)=> {
+        next: (data: any) => {
           alert("Specialization Deleted");
-          this.getAllSpecialization();
+          this.fetchAllSpecialization();
         },
-       error: (error: any)=> {
-          console.log("Error in deleting the specialization."+ error);
+        error: (error: any) => {
+          console.log("Error in deleting the specialization." + error);
         }
-   });
+      });
   }
 
   openEditForm(data: any) {
     const dialogRef = this._dialog.open(SpecializationRegistrationAddEditComponent, {
       data,
-      disableClose:true
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.getAllSpecialization();
+          this.fetchAllSpecialization();
         }
       },
     });

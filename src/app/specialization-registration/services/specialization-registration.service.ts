@@ -7,39 +7,38 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SpecializationRegistrationService {
 
-  baseUrl:string ;
+  baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = environment.config.apiUrl+'/api/v1/doctorSpecialization/';   // http://localhost:8080/api/v1/doctorSpecialization/
+    this.baseUrl = environment.config.apiUrl + '/api/v1/doctor/specialization/';
   }
 
+  saveSpecialization(specialization: SpecializationRegistration): Observable<SpecializationRegistration> {
+    const url = this.baseUrl + 'save';
+    return this.httpClient.post<SpecializationRegistration>(url, specialization);
+  }
 
- saveSpecialization(specialization: SpecializationRegistration): Observable<SpecializationRegistration> {
-  const url = this.baseUrl + 'saveDoctorSpecialization'; //http://localhost:8080/api/v1/doctorSpecialization/saveDoctorSpecialization
-  return this.httpClient.post<SpecializationRegistration>(url, specialization);
-}
-
-
- updateSpecializationById(specializationId: number, specialization: SpecializationRegistration): Observable<SpecializationRegistration> {
-    const url = this.baseUrl+'updateSpecializationById/'+specializationId;  //http://localhost:8080/api/v1/doctorSpecialization/updateSpecializationById
+  updateSpecializationById(specializationId: number, specialization: SpecializationRegistration): Observable<SpecializationRegistration> {
+    const url = this.baseUrl + 'update/' + specializationId;
     return this.httpClient.put<SpecializationRegistration>(url, specialization);
   }
 
- getSpecializationById(id: number): Observable<SpecializationRegistration> {
-    const url = this.baseUrl+ 'getSpecializationById/'+id; //http://localhost:8080/api/v1/doctorSpecialization/getSpecializationById
+  fetchSpecializationById(id: number): Observable<SpecializationRegistration> {
+    const url = this.baseUrl + 'fetchById/' + id;
     return this.httpClient.get<SpecializationRegistration>(url);
   }
 
- getAllSpecialization():  Observable<SpecializationRegistration[]> {
-  const url = this.baseUrl+'getAllSpecialization'; //http://localhost:8080/api/v1/doctorSpecialization/getAllSpecialization
-  return this.httpClient.get<SpecializationRegistration[]>(url);
- }
+  fetchAllSpecialization(): Observable<SpecializationRegistration[]> {
+    const url = this.baseUrl + 'fetchAll';
+    return this.httpClient.get<SpecializationRegistration[]>(url);
+  }
 
- deleteDoctorSpecialization(id: number): Observable<any>  {
- const url = this.baseUrl+'deleteSpecialization/'+ id;  //http://localhost:8080/api/v1/doctorSpecialization/deleteSpecialization
- return this.httpClient.delete<any>(url);
-}
+  deleteSpecialization(id: number): Observable<any> {
+    const url = this.baseUrl + 'delete/' + id;
+    return this.httpClient.delete<any>(url);
+  }
 }
 

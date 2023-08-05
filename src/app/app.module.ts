@@ -14,19 +14,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
-// import { SpecializationRegistrationAddEditComponent } from './specialization-registration/specialization-registration-add-edit/specialization-registration-add-edit.component';
-// import { SpecializationRegistrationComponent } from './specialization-registration/specialization-registration.component';
-// import { SpecializationRegistrationModule } from './specialization-registration/specialization-registration.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // SpecializationRegistrationComponent,
-    // SpecializationRegistrationAddEditComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -50,6 +44,6 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
