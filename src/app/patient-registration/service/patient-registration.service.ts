@@ -13,11 +13,11 @@ export class PatientRegistrationService {
   baseUrl:string ;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = environment.config.apiUrl+'/api/v1/patientreg/';
+    this.baseUrl = environment.config.apiUrl+'/api/v1/patient/';
   }
 
   savePatient(patient: PatientRegistration): Observable<PatientRegistration> {
-    const url = this.baseUrl + 'save' ;
+    const url = this.baseUrl + 'savepatient';
     console.log("from save method in service -- "+patient);
     return this.httpClient.post<PatientRegistration>(url, patient);
   }
@@ -26,7 +26,6 @@ export class PatientRegistrationService {
     const url = this.baseUrl+'fetchallpatient';
     return this.httpClient.get<PatientRegistration[]>(url);
   }
-
 
   updatePatient(patientId: number, patient: PatientRegistration): Observable<PatientRegistration> {
     const url = this.baseUrl+'updatepatient/'+patientId;

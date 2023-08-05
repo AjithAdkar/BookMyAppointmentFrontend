@@ -36,30 +36,35 @@ export class PatientRegistrationComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-  fetchpatients(){
-    this.patientservice.fetchAllPatients().subscribe({
-      next:data =>{
-        this.patientsList = data;
-        this.dataSource = new MatTableDataSource(data);
+  // fetchpatients(){
+  //   this.patientservice.fetchAllPatients().subscribe({
+  //     next:data =>{
+  //       this.patientsList = data;
+  //       this.dataSource = new MatTableDataSource(data);
+  //       this.dataSource.sort = this.sort;
+  //       this.dataSource.paginator = this.paginator;
+  //     },
+  //     error: err=>{
+  //       console.log("unable to fetch the patient details."+ err);
+  //     }
+  //   });
+  // }
+
+  fetchpatients() {
+    this.patientservice.fetchAllPatients().subscribe(
+      (patients: PatientRegistration[]) => {
+        this.patientsList = patients;
+        this.dataSource = new MatTableDataSource(patients);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      error: err=>{
-        console.log("unable to fetch the patient details."+ err);
+      (error) => {
+        // Handle error if any.
+        console.error('Error fetching patients:', error);
       }
-    });
+    );
   }
-        //  this method is use to register new patient, in this component 
-  // openAddEditPatientForm(){
-  //   const dialogRef = this._dialog.open(PatientRegistrationAddEditComponent);
-  //   dialogRef.afterClosed().subscribe({
-  //     next: (val) => {
-  //       if (val) {
-  //         this.fetchpatients();
-  //       }
-  //     },
-  //   });
-  // }
+
   deletePatient(id:number){
     this.patientservice.deletePatient(id).subscribe({
       next:(data :any)=>{

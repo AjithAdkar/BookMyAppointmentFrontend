@@ -9,6 +9,7 @@ const routes: Routes = [
       { path: 'patients', loadChildren: () => import('./patient-registration/patient-registration.module').then(m => m.PatientRegistrationModule) },
       { path: '', redirectTo:'app-dashboard', pathMatch: 'full' },
       { path: 'specialization-registration',  loadChildren: () => import('./specialization-registration/specialization-registration.module').then( m=> m.SpecializationRegistrationModule)},
+      { path: 'add-patient',  loadChildren: () => import('./add-patients/add-patients.module').then( m=> m.AddPatientsModule)},
     ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

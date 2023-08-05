@@ -6,7 +6,7 @@ import { PatientRegistrationAddEditComponent } from './patient-registration-add-
 
 const routes: Routes = [
   { path: '', component: PatientRegistrationComponent },
-  { path: 'register', component: PatientRegistrationAddEditComponent }
+  // { path: 'register', component: PatientRegistrationAddEditComponent }
 ];
 
 @NgModule({
