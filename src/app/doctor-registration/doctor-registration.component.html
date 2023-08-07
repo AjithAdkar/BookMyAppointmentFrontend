@@ -1,98 +1,65 @@
 <div class="card" >
-  
   <div class="customer" style="text-align: center; padding: 50px; ">
-    
     <div  style="padding: 35px;">
       <h1 class="text-center">Doctor Registration Form</h1>
     </div>
     <form [formGroup] =  "doctorRegistrationForm" (ngSubmit)="onFormSubmit()">
       <div>
-        <div class="row justify-content-center" >
-  
-          <div class="col-md-5" >
-            <mat-form-field appearance="outline" class="fixed-width">
-               <mat-label>First Name</mat-label>
-              <input matInput type="text" formControlName="firstName">
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline" class="fixed-width">
-              <mat-label> Last Name</mat-label>
-             <input matInput type="text" formControlName="lastName">
-           </mat-form-field>
-  
-           <mat-form-field appearance="outline" class="fixed-width">
+       <div class="row justify-content-center" >
+        <div class="col-md-5" >
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" formControlName="firstName"> 
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label> Last Name</mat-label>
+            <input matInput type="text" formControlName="lastName">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="fixed-width">
             <mat-label>Gender</mat-label>
             <mat-select formControlName="gender">
-              <mat-option value="male">Male</mat-option>
-              <mat-option value="female">Female</mat-option>
-            </mat-select>
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+           </mat-select>
           </mat-form-field>
-  
-          
-              
-              <mat-form-field appearance="outline" class="fixed-width">
-                <mat-label>Specialization</mat-label>
-                <mat-select formControlName="specialization">
-                  <mat-option value="Cardialogist">Cardialogist</mat-option>
-                  <mat-option value="Dentist"> Dentist</mat-option>
-             </mat-select>   
-             </mat-form-field><br>
-  
-   <!-- <mat-form-field appearance="outline" class="fixed-width">
-
-    <mat-label>Specialization</mat-label>
-
-    <mat-select formControlName="specialization">
-
-      <mat-option *ngFor="let specialization of specializationData" [value]="specialization.id">{{sepcialization.specializationName}}</mat-option>
-
-    </mat-select>
-
-  </mat-form-field> -->
-  
-  
-            <mat-form-field appearance="outline" class="fixed-width">
+          <mat-form-field appearance="outline" class="fixed-width">
+            <mat-label>Specialization</mat-label>
+            <mat-select formControlName="specialization">
+              <mat-option *ngFor="let specialization of specializationList" [value]="specialization.id">{{specialization.specializationName}}</mat-option>
+             </mat-select>
+             </mat-form-field> 
+             <mat-form-field appearance="outline" class="fixed-width">
               <mat-label>Qualification</mat-label>
               <input matInput type="text" formControlName="doctorQualification">
             </mat-form-field>
-          
-          </div> 
-  
+          </div>
           <div class="col-md-5">
             <mat-form-field appearance="outline" class="fixed-width">
               <mat-label>Phone</mat-label>
               <input matInput type="text" formControlName="doctorPhone">
             </mat-form-field>
-  
             <mat-form-field appearance="outline" class="fixed-width">
               <mat-label>Email</mat-label>
               <input matInput type="email" formControlName="doctorEmail" >
             </mat-form-field>
-  
             <mat-form-field appearance="outline" class="fixed-width">
               <mat-label>Experience</mat-label>
               <input matInput type="text" formControlName="doctorExperience">
             </mat-form-field>
-  
             <mat-form-field appearance="outline" class="fixed-width">
               <mat-label>Remarks</mat-label>
               <textarea matInput type="text" formControlName="doctorRemarks"></textarea>
             </mat-form-field>
           </div>
-          
         </div>
-  
+        </div>
+        <div style="padding: 20px;">
+        <button mat-raised-button color="warn" type="reset">Clear</button> &nbsp;
+        <button mat-raised-button  color="primary" type="submit" [disabled]="doctorRegistrationForm.invalid">
+          {{data ? 'Update': 'Save'}}
+          </button>
       </div>
-  
-      <div style="padding: 20px;">
-        
-        <button mat-raised-button color="primary" type="submit">Save</button> &nbsp;
-        <button mat-raised-button  color="warn" type="reset">Cancel</button>
-      
-      </div>
-  </form>
-  
-    
+    </form>
   </div>
 </div>
 

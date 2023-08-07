@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DoctorRegistration } from '../../models/doctorregistration';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DoctorReistrationService } from '../services/doctor-registration.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CoreService } from '../../core/core.service';
 import { DoctorRegistrationComponent } from '../doctor-registration.component';
 
 @Component({
@@ -13,26 +12,23 @@ import { DoctorRegistrationComponent } from '../doctor-registration.component';
   templateUrl: './show-doctor-details.component.html',
   styleUrls: ['./show-doctor-details.component.scss']
 })
-export class ShowDoctorDetailsComponent {
+export class ShowDoctorDetailsComponent implements OnInit{
   displayedColumns: string[] = ['doctorName', 'doctorgender', 'doctorEmail', 'doctorSpecialization','doctorExperience','doctorQualification','action'];
   dataSource!: MatTableDataSource<DoctorRegistration>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   doctorList:DoctorRegistration[] = [];
-  doctorName: string | null=null;
 
-  constructor(private doctorRegistrationservice:DoctorReistrationService,
-              private _dialog: MatDialog,
-              private _coreService: CoreService) {
-                this.doctorName = this.doctorRegistrationservice.getDoctorName();
-              }  
+  constructor(
+               private doctorRegistrationservice:DoctorReistrationService,
+               private _dialog: MatDialog,
+              ) {} 
   
   ngOnInit(): void {
       this.fetchDoctors();
   }
-  applyFilter(event: Event) {
+ applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -64,18 +60,19 @@ export class ShowDoctorDetailsComponent {
       },
     });
   }
-
-  deleteUserRole(id: number){
-    this.doctorRegistrationservice.deleteDoctor(id).subscribe({
+ deleteDoctor(id: number){
+    this.doctorRegistrationservice.deleteDoctor(id)
+    .subscribe({
      next: (data:any)=> {
-        alert("Doctor Deleted Successfully");
+        alert("Specialization Deleted");
         this.fetchDoctors();
       },
      error: (error: any)=> {
-        console.log("Error in deleting the user role."+ error);
+        console.log("Error in deleting the specialization."+ error);
       }
  });
 }
 }
+
 
 

@@ -12,7 +12,7 @@ export class SpecializationRegistrationService {
   baseUrl:string ;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = environment.config.apiUrl+'/api/v1/doctorSpecialization/';   // http://localhost:8080/api/v1/doctorSpecialization/
+    this.baseUrl = environment.config.apiUrl+'/api/v1/doctor/specialization/';   // http://localhost:8080/api/v1/doctorSpecialization/
   }
 
 

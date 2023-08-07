@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserRolesModule } from './user-roles/user-roles.module';
 import { AppDashboardModule } from './app-dashboard/app-dashboard.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,8 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
-    
-  ],
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,
