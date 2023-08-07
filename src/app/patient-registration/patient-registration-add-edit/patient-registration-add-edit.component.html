@@ -1,8 +1,9 @@
 <mat-card>
-  <div class="modal-header">
+  <div class="modal-header" >
     <div class="w-100 text-center">
         <h2 class="modal-title">Patient Registration Form</h2>
     </div>
+    <button type="button" class="btn-close " aria-label="Close" (click)="_dialogRef.close()"></button>
   </div>
     <div class="container">
       <form [formGroup]="patientRegistrationForm" (ngSubmit)="onFormSubmit()">
