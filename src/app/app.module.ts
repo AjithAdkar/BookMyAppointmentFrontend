@@ -30,11 +30,9 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     BrowserAnimationsModule,
     AppDashboardModule,
-    FormsModule,
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
@@ -46,11 +44,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatPaginatorModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatSnackBarModule,
-    MatPaginatorModule,
+    
+  
   ],
   providers: [ ],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -25,9 +25,8 @@ export class DoctorReistrationService {
   }
 
   updateDoctorById(id: number, doctor: DoctorRegistration): Observable<DoctorRegistration> {
-    const url = this.baseUrl+ 'update/';
+    const url = this.baseUrl+ 'updatedoctor/'+id;
     return this.httpClient.put<DoctorRegistration>(url, doctor);
-
   }
 
   fetchDoctorById(doctorId: number): Observable<DoctorRegistration> {

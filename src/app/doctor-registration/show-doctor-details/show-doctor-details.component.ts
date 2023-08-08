@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DoctorRegistration } from '../../models/doctorregistration';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,23 +12,23 @@ import { DoctorRegistrationComponent } from '../doctor-registration.component';
   templateUrl: './show-doctor-details.component.html',
   styleUrls: ['./show-doctor-details.component.scss']
 })
-export class ShowDoctorDetailsComponent implements OnInit{
-  displayedColumns: string[] = ['doctorName', 'doctorgender', 'doctorEmail', 'doctorSpecialization','doctorExperience','doctorQualification','action'];
+export class ShowDoctorDetailsComponent {
+  displayedColumns: string[] = ['doctorName', 'doctorGender', 'doctorEmail', 'doctorSpecialization','doctorExperience','doctorQualification','action'];
   dataSource!: MatTableDataSource<DoctorRegistration>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   doctorList:DoctorRegistration[] = [];
 
-  constructor(
-               private doctorRegistrationservice:DoctorReistrationService,
-               private _dialog: MatDialog,
+  constructor(private doctorRegistrationservice:DoctorReistrationService,
+              private _dialog: MatDialog,
               ) {} 
   
   ngOnInit(): void {
       this.fetchDoctors();
   }
- applyFilter(event: Event) {
+  applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -36,21 +36,22 @@ export class ShowDoctorDetailsComponent implements OnInit{
     }
   }
   fetchDoctors(){
-    this.doctorRegistrationservice.fetchAllDoctors().subscribe({
-      next:data =>{
-        this.doctorList = data;
-        this.dataSource = new MatTableDataSource(data);
+    this.doctorRegistrationservice.fetchAllDoctors().subscribe( 
+      (doctors: DoctorRegistration[]) => {
+        this.doctorList = doctors;
+        this.dataSource = new MatTableDataSource(doctors);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      error: err=>{
-        console.log("unable to fetch the doctor details."+ err);
+      (error) => {
+        console.log("unable to fetch the doctor details."+ error);
       }
-    });
+    );
   }
   openEditForm(data:any){
     const dialogRef = this._dialog.open(DoctorRegistrationComponent, {
       data,
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
@@ -60,18 +61,18 @@ export class ShowDoctorDetailsComponent implements OnInit{
       },
     });
   }
- deleteDoctor(id: number){
+  deleteDoctor(id: number){
     this.doctorRegistrationservice.deleteDoctor(id)
     .subscribe({
      next: (data:any)=> {
         alert("Specialization Deleted");
         this.fetchDoctors();
-      },
+     },
      error: (error: any)=> {
         console.log("Error in deleting the specialization."+ error);
       }
- });
-}
+    });
+  }
 }
 
 

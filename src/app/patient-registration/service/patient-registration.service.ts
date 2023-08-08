@@ -13,33 +13,32 @@ export class PatientRegistrationService {
   baseUrl:string ;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = environment.config.apiUrl+'/api/v1/patientreg/';
+    this.baseUrl = environment.config.apiUrl+'/api/v1/patient/';
   }
 
   savePatient(patient: PatientRegistration): Observable<PatientRegistration> {
-    const url = this.baseUrl + 'save' ;
+    const url = this.baseUrl + 'save';
     console.log("from save method in service -- "+patient);
     return this.httpClient.post<PatientRegistration>(url, patient);
   }
 
   fetchAllPatients():  Observable<PatientRegistration[]> {
-    const url = this.baseUrl+'fetchallpatient';
+    const url = this.baseUrl+'fetchall';
     return this.httpClient.get<PatientRegistration[]>(url);
   }
 
-
   updatePatient(patientId: number, patient: PatientRegistration): Observable<PatientRegistration> {
-    const url = this.baseUrl+'updatepatient/'+patientId;
+    const url = this.baseUrl+'update/'+patientId;
     return this.httpClient.put<PatientRegistration>(url, patient);
   }
 
   fetchPatientById(id: number): Observable<PatientRegistration> {
-    const url = this.baseUrl+ 'fetchpatientbyid/'+id;
+    const url = this.baseUrl+ 'fetchbyid/'+id;
     return this.httpClient.get<PatientRegistration>(url);
   }
 
   deletePatient(id: number): Observable<any>  {
-  const url = this.baseUrl+'deletepatient/'+ id;
+  const url = this.baseUrl+'delete/'+ id;
   return this.httpClient.delete(url, { responseType: 'text' });
   }
 
