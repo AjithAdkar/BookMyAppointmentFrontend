@@ -13,7 +13,7 @@ export class SpecializationRegistrationService {
   baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = environment.config.apiUrl + '/api/v1/doctor/specialization/';
+    this.baseUrl = environment.config.apiUrl+'/api/v1/doctor/specialization/';
   }
 
   saveSpecialization(specialization: SpecializationRegistration): Observable<SpecializationRegistration> {

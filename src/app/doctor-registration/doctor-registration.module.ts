@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ShowDoctorDetailsComponent } from './show-doctor-details/show-doctor-details.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 @NgModule({
   declarations: [
     DoctorRegistrationComponent,
@@ -33,7 +34,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatCardModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MdbFormsModule
   ]
 })
 export class DoctorRegistrationModule { }

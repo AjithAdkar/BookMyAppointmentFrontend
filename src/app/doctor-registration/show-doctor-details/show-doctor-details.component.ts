@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DoctorReistrationService } from '../services/doctor-registration.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CoreService } from '../../core/core.service';
 import { DoctorRegistrationComponent } from '../doctor-registration.component';
 
 @Component({
@@ -14,20 +13,17 @@ import { DoctorRegistrationComponent } from '../doctor-registration.component';
   styleUrls: ['./show-doctor-details.component.scss']
 })
 export class ShowDoctorDetailsComponent {
-  displayedColumns: string[] = ['doctorName', 'doctorgender', 'doctorEmail', 'doctorSpecialization','doctorExperience','doctorQualification','action'];
+  displayedColumns: string[] = ['doctorName', 'doctorGender', 'doctorEmail', 'doctorSpecialization','doctorExperience','doctorQualification','action'];
   dataSource!: MatTableDataSource<DoctorRegistration>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   doctorList:DoctorRegistration[] = [];
-  doctorName: string | null=null;
 
   constructor(private doctorRegistrationservice:DoctorReistrationService,
               private _dialog: MatDialog,
-              private _coreService: CoreService) {
-                this.doctorName = this.doctorRegistrationservice.getDoctorName();
-              }  
+              ) {} 
   
   ngOnInit(): void {
       this.fetchDoctors();
@@ -40,21 +36,22 @@ export class ShowDoctorDetailsComponent {
     }
   }
   fetchDoctors(){
-    this.doctorRegistrationservice.fetchAllDoctors().subscribe({
-      next:data =>{
-        this.doctorList = data;
-        this.dataSource = new MatTableDataSource(data);
+    this.doctorRegistrationservice.fetchAllDoctors().subscribe( 
+      (doctors: DoctorRegistration[]) => {
+        this.doctorList = doctors;
+        this.dataSource = new MatTableDataSource(doctors);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
-      error: err=>{
-        console.log("unable to fetch the doctor details."+ err);
+      (error) => {
+        console.log("unable to fetch the doctor details."+ error);
       }
-    });
+    );
   }
   openEditForm(data:any){
     const dialogRef = this._dialog.open(DoctorRegistrationComponent, {
       data,
+      disableClose: true
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
@@ -64,18 +61,19 @@ export class ShowDoctorDetailsComponent {
       },
     });
   }
-
-  deleteUserRole(id: number){
-    this.doctorRegistrationservice.deleteDoctor(id).subscribe({
+  deleteDoctor(id: number){
+    this.doctorRegistrationservice.deleteDoctor(id)
+    .subscribe({
      next: (data:any)=> {
-        alert("Doctor Deleted Successfully");
+        alert("Specialization Deleted");
         this.fetchDoctors();
-      },
+     },
      error: (error: any)=> {
-        console.log("Error in deleting the user role."+ error);
+        console.log("Error in deleting the specialization."+ error);
       }
- });
+    });
+  }
 }
-}
+
 
 

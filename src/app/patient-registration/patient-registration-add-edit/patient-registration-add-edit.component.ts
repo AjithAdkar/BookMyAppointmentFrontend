@@ -26,6 +26,8 @@ export class PatientRegistrationAddEditComponent implements OnInit{
       patientOccupation: [""],
       comments: [""],
     });
+    console.log(this.data);
+    
   }
 
   ngOnInit(): void {

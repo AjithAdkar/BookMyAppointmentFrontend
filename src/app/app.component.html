@@ -51,27 +51,27 @@
             <mat-list-item routerLink="slot-configuration">
                 <mat-icon>person</mat-icon><span>Slot Configuration</span>
             </mat-list-item>
-        <mat-list-item routerLink="doctor-registration">
-            <mat-icon>person</mat-icon><span>Doctor Registration</span>
-        </mat-list-item>
-        <mat-list-item routerLink="doctor-registration/show-doctor-details">
-            <mat-icon>person</mat-icon><span>Show Doctor Details</span>
-        </mat-list-item>
-        <mat-list-item routerLink="specialization-registration">
-            <mat-icon>person</mat-icon><span>Specialization Registration</span>
-        </mat-list-item>
-        <mat-list-item routerLink="patients">
-            <mat-icon>person</mat-icon><span>Show Patients</span>
-        </mat-list-item>
-        <mat-list-item routerLink="add-patient">
-            <mat-icon>person</mat-icon><span>Add Patient</span>
-        </mat-list-item>
+            <mat-list-item routerLink="show-doctor-details">
+                <mat-icon>person</mat-icon><span>Show Doctor Details</span>
+            </mat-list-item>
+            <mat-list-item routerLink="add-doctor">
+                <mat-icon>person</mat-icon><span>Doctor Registration</span>
+            </mat-list-item>
+            <mat-list-item routerLink="specialization-registration">
+                <mat-icon>person</mat-icon><span>Specialization Registration</span>
+             </mat-list-item>
+             <mat-list-item routerLink="patients">
+                <mat-icon>person</mat-icon><span>Show Patients</span>
+             </mat-list-item>
+             <mat-list-item routerLink="add-patient">
+                <mat-icon>person</mat-icon><span>Add Patient</span>
+             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
+<mat-sidenav-content>
         <router-outlet>
             <div class="container pt-3">
-                <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
             </div>
         </router-outlet>
     </mat-sidenav-content>
