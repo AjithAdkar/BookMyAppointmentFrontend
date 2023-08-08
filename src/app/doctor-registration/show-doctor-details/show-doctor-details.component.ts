@@ -62,18 +62,20 @@ export class ShowDoctorDetailsComponent {
     });
   }
   deleteDoctor(id: number){
+    const confirmDelete = window.confirm("Are you sure you want to delete this Doctor?");
+    if (confirmDelete) {
     this.doctorRegistrationservice.deleteDoctor(id)
     .subscribe({
      next: (data:any)=> {
-        alert("Specialization Deleted");
+        alert("Doctor Details Deleted");
         this.fetchDoctors();
      },
      error: (error: any)=> {
-        console.log("Error in deleting the specialization."+ error);
+        console.log("Error in deleting the doctor."+ error);
       }
     });
   }
+ }
 }
-
 
 
