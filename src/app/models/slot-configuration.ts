@@ -1,10 +1,15 @@
+import { SlotDetail } from "./SlotDetail";
+import { DoctorRegistration } from "./doctorregistration";
+import { SpecializationRegistration } from "./specialization-registration";
+
 export interface SlotConfiguration{
     id : number,
-    doctorName : any ,
-    registrationDate : string,
-    startTime: string,
-    endTime: string,
-    duration: number,
+    doctorName :DoctorRegistration,
+    slotDate : string,
+    slotDetail: SlotDetail[],
     remarks: string,
-    specialization: any,
+    doctorSpecialization:SpecializationRegistration,
+    doctorSlotCount:number,
+    startDate:string,
+    endDate:String
 }
