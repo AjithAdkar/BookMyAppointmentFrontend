@@ -162,10 +162,10 @@ export class SlotConfigurationComponent implements OnInit {
       const startTime24 = this.convertTimeTo24Hours(startTime);
       const endTime24 = this.convertTimeTo24Hours(endTime);
 
-      // this.slotConfigurationForm.patchValue({
-      //   startTime: startTime24,
-      //   endTime: endTime24
-      // });
+      this.slotConfigurationForm.patchValue({
+        startTime: startTime24,
+        endTime: endTime24
+      });
 
       this.start24Time = startTime24;
       this.end24Time = endTime24;
@@ -187,8 +187,8 @@ export class SlotConfigurationComponent implements OnInit {
         slotDetailArray.removeAt(0);
       }
 
-      const slotConfiguration = this.slotConfigurationForm.value;
-      console.log(slotConfiguration);
+      // const slotConfiguration = this.slotConfigurationForm.value;
+      // console.log(slotConfiguration);
 
 
       // Saving Operation
@@ -284,8 +284,8 @@ export class SlotConfigurationComponent implements OnInit {
         slotDetailArray.removeAt(0);
       }
 
-      const slotConfiguration = this.slotConfigurationForm.value;
-      console.log(slotConfiguration);
+      // const slotConfiguration = this.slotConfigurationForm.value;
+      // console.log(slotConfiguration);
 
       //// Saving Operation
       {
@@ -349,8 +349,6 @@ export class SlotConfigurationComponent implements OnInit {
     const lunchEnd = new Date(`2000-01-01 ${this.lunchTimeStart}`);
 
     // Calculate the time difference in minutes between the start and end times
-    // const slotDurationInMinutes = 15;
-
     const slotDurationInMinutes = (this.slotConfigurationForm.get('slotDetail') as FormArray).at(0)?.get('slotDuration')?.value;
     for (let i = startDate.getTime(); i <= endDate.getTime(); i += slotDurationInMinutes * 60 * 1000) {
       const slotStart = new Date(i);
@@ -387,8 +385,6 @@ export class SlotConfigurationComponent implements OnInit {
       // Format the time in HH:mm format
       const slotStartTime = slotStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const slotEndTime = slotEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      // console.log(slotStartTime);
-      // console.log(slotEndTime);
 
       // Add the slot to the array
       this.timeSlots.push({ start24Time: slotStartTime, end24Time: slotEndTime });
