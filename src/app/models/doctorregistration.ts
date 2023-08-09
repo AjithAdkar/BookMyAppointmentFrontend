@@ -9,4 +9,4 @@ export interface DoctorRegistration{
      doctorQualification:string,
      doctorRemarks:string,
      specialization:any
-}
+     }

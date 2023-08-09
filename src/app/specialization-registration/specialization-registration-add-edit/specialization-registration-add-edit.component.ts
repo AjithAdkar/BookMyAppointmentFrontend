@@ -21,7 +21,7 @@ export class SpecializationRegistrationAddEditComponent implements OnInit {
     private _coreService: CoreService
   ) {
     this.specializationRegistrationForm = this._fb.group({
-      specializationName:  ['', Validators.required],
+      specializationName: ['', Validators.required],
       specializationDescription: '',
     });
   }
@@ -32,8 +32,6 @@ export class SpecializationRegistrationAddEditComponent implements OnInit {
 
   onFormSubmit() {
     if (this.specializationRegistrationForm.valid) {
-      console.log(this.specializationRegistrationForm.value);
-      
       if (this.data) {
         this.specializationRegistrationService
           .updateSpecializationById(this.data.id, this.specializationRegistrationForm.value)
@@ -47,16 +45,16 @@ export class SpecializationRegistrationAddEditComponent implements OnInit {
             },
           });
       } else {
-      this.specializationRegistrationService.saveSpecialization(this.specializationRegistrationForm.value).subscribe({
-        next: (val: any) => {
-          this._coreService.openSnackBar('Specialization Registration added successfully');
-          this._dialogRef.close(true);
-        },
-        error: (err: any) => {
-          console.error(err);
-        },
-      });
-    }  
+        this.specializationRegistrationService.saveSpecialization(this.specializationRegistrationForm.value).subscribe({
+          next: (val: any) => {
+            this._coreService.openSnackBar('Specialization Registration added successfully');
+            this._dialogRef.close(true);
+          },
+          error: (err: any) => {
+            console.error(err);
+          },
+        });
+      }
+    }
   }
- }
 }

@@ -1,29 +1,27 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormBuilder, AbstractControl,}from "@angular/forms";
-import { DoctorReistrationService } from "./services/doctor-registration.service";
-import { SpecializationRegistrationService } from "../specialization-registration/services/specialization-registration.service";
-import { SpecializationRegistration } from "../models/specialization-registration";
-import { CoreService } from "../core/core.service";
-import { DoctorRegistration } from "../models/doctorregistration";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DoctorReistrationService } from '../doctor-registration/services/doctor-registration.service';
+import { SpecializationRegistrationService } from '../specialization-registration/services/specialization-registration.service';
+import { CoreService } from '../core/core.service';
+import { SpecializationRegistration } from '../models/specialization-registration';
+import { DoctorRegistration } from '../models/doctorregistration';
 
 @Component({
-  selector: "app-doctor-registration",
-  templateUrl: "./doctor-registration.component.html",
-  styleUrls: ["./doctor-registration.component.scss"],
+  selector: 'app-add-doctor',
+  templateUrl: './add-doctor.component.html',
+  styleUrls: ['./add-doctor.component.scss']
 })
-export class DoctorRegistrationComponent implements OnInit {
+export class AddDoctorComponent implements OnInit {
+
   doctorRegistrationForm: FormGroup;
   specializationList: SpecializationRegistration[] = [];
 
-  constructor(
+ constructor(
     private _fb: FormBuilder,
     private doctorRegistrationService: DoctorReistrationService,
     private specializationService: SpecializationRegistrationService,
     private _coreService: CoreService,
-    public _dialogRef:MatDialogRef<DoctorRegistrationComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:DoctorRegistration,
-) {
+    ){
     this.doctorRegistrationForm = this._fb.group({
       firstName: ["Dr.", Validators.required],
       lastName: ["", Validators.required],
@@ -36,17 +34,13 @@ export class DoctorRegistrationComponent implements OnInit {
       specialization: ["", Validators.required],
     });
   }
+
   ngOnInit(): void {
-    if(this.data){
-      this.doctorRegistrationForm.patchValue(this.data);    
-      this.doctorRegistrationForm
-      .get('specialization')
-      ?.setValue(this.data.specialization.id);
-    }
     this.specializationService.fetchAllSpecialization().subscribe((specData) => {
     this.specializationList = specData;
-      });
+    });
   }
+
   onFormSubmit() {
     if (this.doctorRegistrationForm.valid) {
       console.log(this.doctorRegistrationForm.value);
@@ -60,27 +54,14 @@ export class DoctorRegistrationComponent implements OnInit {
         doctorExperience: this.doctorRegistrationForm.value.doctorExperience,
         doctorQualification: this.doctorRegistrationForm.value.doctorQualification,
         doctorRemarks: this.doctorRegistrationForm.value.doctorRemarks,
-        specialization: {'id': parseInt(this.doctorRegistrationForm.value.specialization),},
+        specialization: {id: parseInt(this.doctorRegistrationForm.value.specialization),},
       };
-      if (this.data) {
-         this.doctorRegistrationService.updateDoctorById(this.data.id, doctor).subscribe({
-            next: (val: any) => {
-              this._coreService.openSnackBar("Doctor updated successfully");
-              this._dialogRef.close(true);
-              this.doctorRegistrationForm.reset();
-              this.doctorRegistrationForm.get("firstName")?.setValue("Dr.");
-              Object.keys(this.doctorRegistrationForm.controls).forEach((key) => {
-              this.doctorRegistrationForm.get(key)?.setErrors(null);
-               });
-            },
-          });
-      } else {
         this.doctorRegistrationService.saveDoctor(doctor).subscribe({
           next: (val: any) => {
             this._coreService.openSnackBar("Doctor Registration added successfully");
             this.doctorRegistrationForm.reset();
             Object.keys(this.doctorRegistrationForm.controls).forEach((key) => {
-              this.doctorRegistrationForm.get(key)?.setErrors(null);
+            this.doctorRegistrationForm.get(key)?.setErrors(null);
             });
           },
           error: (err: any) => {
@@ -89,13 +70,16 @@ export class DoctorRegistrationComponent implements OnInit {
         });
       }
     }
-  }
+  
   phoneValidator(control: AbstractControl): { [key: string]: any } | null {
     const phoneNumber = control.value;
     const validPattern = /^[6-9][0-9]{9}$/;
     if (phoneNumber && !validPattern.test(phoneNumber)) {
       return { invalidPhoneNumber: true };
     }
-    return null;
+      return null;
   }
 }
+
+
+

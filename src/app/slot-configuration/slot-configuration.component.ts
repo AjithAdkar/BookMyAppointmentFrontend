@@ -70,7 +70,7 @@ export class SlotConfigurationComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.specializationRegistrationService.getAllSpecialization().subscribe(getallspecialization => {
+    this.specializationRegistrationService.fetchAllSpecialization().subscribe(getallspecialization => {
       this.specializationData = getallspecialization;
     });
     this.doctorReistrationService.fetchAllDoctors().subscribe(getalldoctor => {
